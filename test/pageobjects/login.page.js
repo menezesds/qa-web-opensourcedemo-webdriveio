@@ -8,17 +8,10 @@ class LoginPage extends Page {
     /**
      * define selectors using getter methods
      */
-    get inputUsername () {
-        return $('#username');
-    }
-
-    get inputPassword () {
-        return $('#password');
-    }
-
-    get btnSubmit () {
-        return $('button[type="submit"]');
-    }
+    get inputUsername () { return $('//input[@name="username"]');}
+    get inputPassword () { return $('//input[@name="password"]');}
+    get btnLogin () { return $('//button[contains(.,"Login")]');}
+    get errorMessageInvalidCredentials() { return $('//*[text()="Invalid credentials"]');}
 
     /**
      * a method to encapsule automation code to interact with the page
@@ -27,14 +20,14 @@ class LoginPage extends Page {
     async login (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+        await this.btnLogin.click();
     }
 
     /**
      * overwrite specific options to adapt it to page object
      */
     open () {
-        return super.open('login');
+        return super.open('web/index.php/auth/login');
     }
 }
 
